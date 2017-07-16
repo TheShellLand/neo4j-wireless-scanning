@@ -1,5 +1,8 @@
 """ Neo4j bolt connector
 
+Expects neo4j extracted to:
+  - db/neo4j/neo4j-community-3.2.1
+
 
 Written         : Eric Jaw
 Version         : 1.0
@@ -19,7 +22,7 @@ def db_start():
     """
 
     binary = 'db/neo4j/neo4j-community-3.2.1/bin/neo4j'
-    params = ' console &'
+    params = ' console'
     run = binary + params
 
     if os.path.exists(binary):
