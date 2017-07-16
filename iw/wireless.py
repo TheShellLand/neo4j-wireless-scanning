@@ -1,6 +1,6 @@
 # /usr/bin/python3
 
-"""Scan, Own, Find (SOF) everything wirelss on the 2.5 and 5.0 GHz bandwidth
+"""Scan, Own, Find (SOF) everything wireless on the 2.5 and 5.0 GHz bandwidth
 
 Bluetooth bandwidth support is coming soon, in version, like, 9.0bt
 """
@@ -15,51 +15,32 @@ import re
 # TODO: Enuerate system
 # Store all information inside RAM
 # Everything will need to be recreated upon start-up and will be completely empty and blank to start with,
-# but will be the only wya to have a system that lives in RAM
+# but will be the only way to have a system that lives in RAM
 # And also self-generating from the very beginning
 def system():
     """What is in this system?
-
-    :return:
     """
 
     if sys.platform == 'linux':
-        return system_start()
+        return system_start(sys.platform)
 
     if sys.platform is 'windows':
-        return Exception('You\'re using Window\'s? Is this a game to you? This only supports Linux')
+        return system_start(sys.platform)
 
     return False
 
 
-def system_start():
-    return wireless()
-
-
-# TODO: Get system wireless devices
-# Using iw, and iwconfig to enumberate the wireless devices of the system
-def devices():
-    """Return either a list of all wireless devices or the best wireless device to use on this excursion
-
-    :return:
+def system_start(platform):
+    """Initialize the system and its devices
     """
 
-    # TODO: Get devices from iwconfig
-    # These should be the network devices that the system knows based on iwconfig
+    if platform == 'windows':
+        return Exception('You\'re using Window\'s? Is this a game to you? This only supports Linux')
 
-    # TODO: Get devices from ifconfig
-    # Possibly match against the devices found in ifconfig
+    if platform == 'linux':
+        return wireless()
 
-    # TODO: Get devices from dmesg
-    # Possibly match what the boot log shows
-
-    # TODO: Get devices from lspci
-    # Maybe something here
-
-    # /sys/class/net/
-    path = '/sys/class/net/'
-
-    return path, os.listdir(path)
+    return Exception('[Error] Unknown system')
 
 
 def wireless():
@@ -92,27 +73,58 @@ def wireless():
         return Exception('Can\'t find any wireless devices in', path, 'We tested these:', dirlist)
 
 
+# TODO: Get system wireless devices
+# Using iw, and iwconfig to enumerate the wireless devices of the system
+def devices():
+    """Return either a list of all wireless devices or the best wireless device to use on this excursion
+    """
+
+    # TODO: Get wireless devices from iwconfig
+    # These should be the network devices that the system knows based on iwconfig
+
+    # TODO: Get wireless devices from ifconfig
+    # Possibly match against the devices found in ifconfig
+
+    # TODO: Get wireless devices from dmesg
+    # Possibly match what the boot log shows
+
+    # TODO: Get wireless devices from lspci
+    # Maybe something here
+
+    # /sys/class/net/
+    path = '/sys/class/net/'
+
+    return path, os.listdir(path)
+
+
 # TODO: Find out all of the wireless stations, bssids around
 # The list of all the stations and bssids will be used to create a database, a graph database
-def radio():
+def sonar():
     """Get all of the wireless signals around you and the area that you're in
     Let the owning begin
-
-    :return:
     """
+
     return
 
 
-# TODO: Create local graph databse
+# TODO: Create local graph database
 # The local graph database will need to be imported/synced with the main database in some way
 def db():
     """All of this data needs a home, it needs to go somewhere, be somewhere
     Mind as well create a relational graph database of everything that's happening around you
 
     The graph database will need to be synced into the master database (somehow)
-
-    :return:
     """
+
+    # TODO: Check if database is installed
+    # Check if path to neo4j exists
+
+    # TODO: Check if database is running
+    # Check if bolt port is available?
+    # Try authenticating to bolt port
+
+    # TODO: Start database if it isn't running
+
     return
 
 

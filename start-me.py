@@ -3,7 +3,7 @@
 """Start me up and see where things go
 """
 
-import w.wireless
+import iw.wireless
 
 if __name__ == '__main__':
-    w.wireless.main()
+    iw.wireless.main()
